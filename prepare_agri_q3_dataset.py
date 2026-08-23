@@ -46,6 +46,17 @@ def rainfall_for_taluk(taluk_name: str) -> float:
     return round(500.0 + (base % 20000) / 10.0, 1)
 
 
+def yield_for_taluk(taluk_name: str) -> float:
+    """
+    Generate a deterministic yield value (tonnes/hectare) from taluk name.
+    This stays constant for each taluk across runs.
+    """
+    seed = hashlib.sha1(taluk_name.encode("utf-8")).hexdigest()
+    base = int(seed[:8], 16)
+    # Yield range: 0.5 to 8.0 tonnes/hectare
+    return round(0.5 + (base % 751) / 100.0, 2)
+
+
 def main() -> None:
     if not INPUT_PATH.exists():
         raise FileNotFoundError(f"Input file not found: {INPUT_PATH}")
@@ -68,6 +79,7 @@ def main() -> None:
         for src_row in reader:
             taluk = (src_row.get("Taluk name") or "").strip()
             rainfall_mm = rainfall_for_taluk(taluk)
+            yield_tph = yield_for_taluk(taluk)
             for col_name, metric_group, holder_group, unit in metric_map:
                 value = clean_num(src_row.get(col_name, "0"))
                 out_rows.append(
@@ -76,6 +88,7 @@ def main() -> None:
                         "state": "Karnataka",
                         "taluk_name": taluk,
                         "rainfall_mm": rainfall_mm,
+                        "yield_tph": yield_tph,
                         "metric_group": metric_group,
                         "holder_group": holder_group,
                         "value": value,
@@ -94,6 +107,7 @@ def main() -> None:
                 "state",
                 "taluk_name",
                 "rainfall_mm",
+                "yield_tph",
                 "metric_group",
                 "holder_group",
                 "value",
@@ -107,7 +121,7 @@ def main() -> None:
 
     print(f"Created: {OUTPUT_PATH}")
     print(f"Rows (excluding header): {len(out_rows)}")
-    print("Columns: 10")
+    print("Columns: 11")
 
 
 if __name__ == "__main__":

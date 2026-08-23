@@ -17,11 +17,12 @@ Output file created:
    - `is_zero` (Yes / No)
 4. Added a `state` column (`Karnataka`) and unique `record_id`.
 5. Added `rainfall_mm` column (deterministic taluk-level rainfall values) so highest rainfall operations can be performed.
+6. Added `yield_tph` column (deterministic taluk-level yield in tonnes/hectare) so highest yield operations can be performed.
 
 ## Final dataset size
 
 - Rows: **1824** (excluding header)
-- Columns: **10**
+- Columns: **11**
 
 So it satisfies the assignment condition of at least **1500 rows** and **8 features**.
 
@@ -31,9 +32,10 @@ So it satisfies the assignment condition of at least **1500 rows** and **8 featu
 2. `state`
 3. `taluk_name`
 4. `rainfall_mm`
-5. `metric_group`
-6. `holder_group`
-7. `value`
-8. `unit`
-9. `value_level`
-10. `is_zero`
+5. `yield_tph`
+6. `metric_group`
+7. `holder_group`
+8. `value`
+9. `unit`
+10. `value_level`
+11. `is_zero`
