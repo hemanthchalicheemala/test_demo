@@ -1,0 +1,51 @@
+patient_id,patient_name,age,gender,state,district,occupation,fever_f,cough,sore_throat,spo2,travel_history,vaccination_doses,comorbidity
+P001,Aarav Sharma,14,Male,Uttar Pradesh,Lucknow,Student,101.2,Yes,Yes,95,None,2,None
+P002,Ananya Iyer,33,Female,Tamil Nadu,Chennai,Software Engineer,98.4,No,No,99,None,3,Asthma
+P003,Rohan Patil,67,Male,Maharashtra,Pune,Retired Teacher,97.0,No,No,98,None,4,Diabetes
+P004,Meera Nair,52,Female,Kerala,Ernakulam,Nurse,100.1,Yes,Yes,94,Domestic,3,Hypertension
+P005,Vivaan Singh,9,Male,Rajasthan,Jaipur,Student,102.0,Yes,Yes,93,None,1,None
+P006,Diya Kulkarni,27,Female,Karnataka,Bengaluru,Analyst,99.2,Yes,No,97,None,3,None
+P007,Harsh Vardhan,61,Male,Delhi,New Delhi,Retired Banker,96.9,No,No,98,None,4,Hypertension
+P008,Sneha Reddy,45,Female,Telangana,Hyderabad,Entrepreneur,100.8,Yes,Yes,95,International,2,Diabetes
+P009,Aditya Joshi,17,Male,Madhya Pradesh,Indore,Student,101.0,Yes,No,94,None,2,None
+P010,Kavya Menon,29,Female,Kerala,Thiruvananthapuram,Journalist,97.8,No,No,99,None,3,None
+P011,Krishna Chawla,73,Male,Punjab,Amritsar,Retired Army Officer,96.7,No,No,98,None,4,COPD
+P012,Ishita Gupta,21,Female,Haryana,Gurugram,College Student,99.5,Yes,Yes,96,Domestic,2,None
+P013,Arjun Das,38,Male,West Bengal,Kolkata,Sales Manager,100.4,Yes,No,95,None,3,Hypertension
+P014,Priya Deshmukh,64,Female,Maharashtra,Nagpur,Retired Clerk,97.2,No,No,99,None,4,Diabetes
+P015,Ritvik Sinha,12,Male,Bihar,Patna,Student,100.9,Yes,Yes,94,None,1,None
+P016,Sanya Kapoor,56,Female,Delhi,New Delhi,Govt Officer,98.1,No,No,98,None,3,Hypertension
+P017,Karthik Balan,31,Male,Tamil Nadu,Coimbatore,Accountant,99.8,Yes,No,96,None,3,None
+P018,Aisha Khan,42,Female,Uttar Pradesh,Kanpur,Teacher,101.1,Yes,Yes,94,Domestic,2,Asthma
+P019,Mohit Verma,68,Male,Rajasthan,Udaipur,Retired Engineer,96.8,No,No,98,None,4,None
+P020,Neha Paul,24,Female,West Bengal,Howrah,Intern,98.7,No,No,99,None,2,None
+P021,Yash Malhotra,15,Male,Delhi,New Delhi,Student,101.6,Yes,Yes,93,None,2,None
+P022,Tanvi Rao,36,Female,Karnataka,Mysuru,Doctor,99.1,Yes,No,97,None,3,None
+P023,Devansh Jain,58,Male,Gujarat,Ahmedabad,Trader,100.3,Yes,Yes,95,International,2,Diabetes
+P024,Nitya Pillai,63,Female,Kerala,Kozhikode,Homemaker,96.6,No,No,98,None,4,Hypertension
+P025,Parth Trivedi,19,Male,Gujarat,Surat,College Student,98.9,No,No,99,None,2,None
+P026,Rhea Bhatia,47,Female,Haryana,Faridabad,Consultant,100.7,Yes,Yes,94,None,3,Asthma
+P027,Gaurav Mishra,72,Male,Uttar Pradesh,Varanasi,Retired Professor,97.1,No,No,98,None,4,Diabetes
+P028,Myra Thomas,8,Female,Goa,North Goa,Student,101.9,Yes,Yes,93,None,1,None
+P029,Shivam Roy,34,Male,West Bengal,Siliguri,Photographer,99.0,Yes,No,97,Domestic,2,None
+P030,Pooja Yadav,26,Female,Bihar,Gaya,Pharmacist,98.3,No,No,99,None,3,None
+P031,Lakshya Arora,13,Male,Punjab,Ludhiana,Student,100.8,Yes,Yes,94,None,1,None
+P032,Vaishnavi Naidu,54,Female,Andhra Pradesh,Vijayawada,Business Owner,99.6,Yes,No,96,None,3,Hypertension
+P033,Reyansh Tiwari,41,Male,Madhya Pradesh,Bhopal,Lawyer,100.2,Yes,Yes,95,None,3,None
+P034,Anika Sen,62,Female,Assam,Guwahati,Retired Lecturer,96.9,No,No,98,None,4,None
+P035,Siddharth Bose,28,Male,Odisha,Bhubaneswar,Data Analyst,98.5,No,No,99,None,3,None
+P036,Muskan Sheikh,23,Female,Maharashtra,Mumbai,Airline Staff,100.6,Yes,Yes,94,International,2,None
+P037,Nakul Mehta,65,Male,Gujarat,Rajkot,Retired Mechanic,97.0,No,No,99,None,4,Hypertension
+P038,Zoya Ali,16,Female,Uttar Pradesh,Prayagraj,Student,101.4,Yes,Yes,93,None,2,None
+P039,Pranav Kulshrestha,37,Male,Chhattisgarh,Raipur,Civil Engineer,99.3,Yes,No,97,Domestic,3,None
+P040,Ira Banerjee,49,Female,West Bengal,Darjeeling,Teacher,100.0,Yes,Yes,95,None,3,Asthma
+P041,Raghav Oberoi,70,Male,Delhi,New Delhi,Retired Judge,96.7,No,No,98,None,4,Diabetes
+P042,Tanya Bhardwaj,32,Female,Himachal Pradesh,Shimla,Tour Coordinator,99.7,Yes,No,96,Domestic,2,None
+P043,Dhruv Subramanian,11,Male,Tamil Nadu,Madurai,Student,101.3,Yes,Yes,93,None,1,None
+P044,Esha Pradhan,57,Female,Sikkim,Gangtok,Administrator,98.2,No,No,98,None,3,Hypertension
+P045,Kabir Rawat,44,Male,Uttarakhand,Dehradun,Police Officer,100.5,Yes,Yes,95,None,3,None
+P046,Suhani Kaur,18,Female,Punjab,Jalandhar,College Student,98.8,No,No,99,None,2,None
+P047,Omkar Sawant,60,Male,Maharashtra,Nashik,Retired Driver,96.8,No,No,98,None,4,None
+P048,Navya Dutta,25,Female,Tripura,Agartala,Research Assistant,99.4,Yes,No,97,None,2,None
+P049,Rudra Chakraborty,39,Male,Jharkhand,Ranchi,Procurement Manager,100.1,Yes,Yes,95,None,3,Diabetes
+P050,Aditi Srivastava,30,Female,Uttar Pradesh,Noida,HR Executive,98.6,No,No,99,None,3,None
