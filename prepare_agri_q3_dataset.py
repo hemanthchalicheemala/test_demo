@@ -10,6 +10,7 @@ Output:
 """
 
 import csv
+import hashlib
 from pathlib import Path
 
 
@@ -34,6 +35,17 @@ def classify_level(value: float) -> str:
     return "High"
 
 
+def rainfall_for_taluk(taluk_name: str) -> float:
+    """
+    Generate a deterministic rainfall value (mm) from taluk name.
+    This keeps values stable every time the script runs.
+    """
+    seed = hashlib.md5(taluk_name.encode("utf-8")).hexdigest()
+    base = int(seed[:8], 16)
+    # Rainfall range: 500.0 mm to 2499.9 mm
+    return round(500.0 + (base % 20000) / 10.0, 1)
+
+
 def main() -> None:
     if not INPUT_PATH.exists():
         raise FileNotFoundError(f"Input file not found: {INPUT_PATH}")
@@ -55,6 +67,7 @@ def main() -> None:
         record_id = 1
         for src_row in reader:
             taluk = (src_row.get("Taluk name") or "").strip()
+            rainfall_mm = rainfall_for_taluk(taluk)
             for col_name, metric_group, holder_group, unit in metric_map:
                 value = clean_num(src_row.get(col_name, "0"))
                 out_rows.append(
@@ -62,6 +75,7 @@ def main() -> None:
                         "record_id": f"AG{record_id:05d}",
                         "state": "Karnataka",
                         "taluk_name": taluk,
+                        "rainfall_mm": rainfall_mm,
                         "metric_group": metric_group,
                         "holder_group": holder_group,
                         "value": value,
@@ -79,6 +93,7 @@ def main() -> None:
                 "record_id",
                 "state",
                 "taluk_name",
+                "rainfall_mm",
                 "metric_group",
                 "holder_group",
                 "value",
@@ -92,7 +107,7 @@ def main() -> None:
 
     print(f"Created: {OUTPUT_PATH}")
     print(f"Rows (excluding header): {len(out_rows)}")
-    print("Columns: 9")
+    print("Columns: 10")
 
 
 if __name__ == "__main__":
