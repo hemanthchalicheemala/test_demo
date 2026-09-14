@@ -28,3 +28,9 @@
   - `Numberof_Bends` (`Low`, `Moderate`, `High`)
   - `Trafficvolume` (`Low`, `Medium`, `High`)
   - `AccidentRisk` (`Low`, `Medium`, `High`)
+
+#### Generalized version (recommended for model evaluation)
+- File: `road_transport_records_generalized.csv`
+- Rows: 600
+- Same columns as above
+- Built with class overlap and random label noise, so ID3 models are less likely to overfit and report unrealistically perfect performance.
