@@ -1,0 +1,154 @@
+// RentConnect data model
+// SQLite for easy local dev. Enums are represented as strings (SQLite limitation).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("TENANT") // OWNER | TENANT | ADMIN
+  phone     String?
+  avatar    String?
+  bio       String?
+  city      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  properties    Property[]      @relation("OwnerProperties")
+  requests      RentalRequest[] @relation("TenantRequests")
+  leasesAsTenant Lease[]        @relation("TenantLeases")
+  leasesAsOwner  Lease[]        @relation("OwnerLeases")
+  payments      Payment[]       @relation("TenantPayments")
+  complaints    Complaint[]     @relation("TenantComplaints")
+  notifications Notification[]
+  announcements Announcement[]  @relation("OwnerAnnouncements")
+}
+
+model Property {
+  id              Int      @id @default(autoincrement())
+  ownerId         Int
+  owner           User     @relation("OwnerProperties", fields: [ownerId], references: [id])
+  title           String
+  address         String
+  city            String
+  monthlyRent     Float
+  securityDeposit Float    @default(0)
+  bedrooms        Int      @default(1)
+  bathrooms       Int      @default(1)
+  furnished       Boolean  @default(false)
+  parking         Boolean  @default(false)
+  propertyType    String   @default("Apartment") // Apartment | House | Studio | Villa | Condo
+  amenities       String   @default("") // comma-separated
+  description     String   @default("")
+  status          String   @default("AVAILABLE") // AVAILABLE | OCCUPIED
+  approved        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  images    PropertyImage[]
+  requests  RentalRequest[]
+  leases    Lease[]
+  payments  Payment[]
+  complaints Complaint[]
+  announcements Announcement[]
+}
+
+model PropertyImage {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  url        String
+}
+
+model RentalRequest {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenantId   Int
+  tenant     User     @relation("TenantRequests", fields: [tenantId], references: [id])
+  message    String   @default("")
+  status     String   @default("PENDING") // PENDING | ACCEPTED | REJECTED | CANCELLED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Lease {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenantId   Int
+  tenant     User     @relation("TenantLeases", fields: [tenantId], references: [id])
+  ownerId    Int
+  owner      User     @relation("OwnerLeases", fields: [ownerId], references: [id])
+  startDate  DateTime @default(now())
+  endDate    DateTime?
+  rent       Float
+  deposit    Float    @default(0)
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  payments   Payment[]
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  leaseId    Int?
+  lease      Lease?   @relation(fields: [leaseId], references: [id], onDelete: SetNull)
+  propertyId Int
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenantId   Int
+  tenant     User     @relation("TenantPayments", fields: [tenantId], references: [id])
+  amount     Float
+  dueDate    DateTime
+  paidDate   DateTime?
+  status     String   @default("PENDING") // PAID | PENDING | OVERDUE
+  method     String?
+  createdAt  DateTime @default(now())
+}
+
+model Complaint {
+  id          Int      @id @default(autoincrement())
+  propertyId  Int
+  property    Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tenantId    Int
+  tenant      User     @relation("TenantComplaints", fields: [tenantId], references: [id])
+  title       String
+  description String   @default("")
+  category    String   @default("General")
+  priority    String   @default("Medium") // Low | Medium | High
+  status      String   @default("OPEN") // OPEN | IN_PROGRESS | RESOLVED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("info") // info | success | warning | request | payment | complaint
+  read      Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+}
+
+model Announcement {
+  id         Int      @id @default(autoincrement())
+  ownerId    Int
+  owner      User     @relation("OwnerAnnouncements", fields: [ownerId], references: [id])
+  propertyId Int?
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: SetNull)
+  title      String
+  body       String
+  createdAt  DateTime @default(now())
+}
