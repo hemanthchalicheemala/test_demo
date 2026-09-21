@@ -1,0 +1,13 @@
+{
+  "name": "rentconnect",
+  "version": "1.0.0",
+  "description": "RentConnect – Tenant & House Owner Management System (monorepo)",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix server install && npm --prefix client install && npm --prefix server run setup",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "seed": "npm --prefix server run seed",
+    "build": "npm --prefix client run build"
+  }
+}
