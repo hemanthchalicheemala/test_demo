@@ -22,7 +22,7 @@ const toneFor = (type: string) => {
     case 'request': return 'bg-brand-50 text-brand-600';
     case 'success': return 'bg-emerald-50 text-emerald-600';
     case 'warning': return 'bg-red-50 text-red-600';
-    default: return 'bg-slate-100 text-slate-500';
+    default: return 'bg-ink-100 text-ink-500';
   }
 };
 
@@ -44,19 +44,19 @@ export default function NotificationsPage() {
       {loading ? <Spinner /> : items.length === 0 ? (
         <EmptyState icon={<Bell size={40} />} title="No notifications yet" subtitle="We'll let you know when something happens." />
       ) : (
-        <div className="card divide-y divide-slate-100">
+        <div className="card divide-y divide-ink-100">
           {items.map((n) => (
             <div key={n.id} className={`flex items-start gap-4 p-4 ${!n.read ? 'bg-brand-50/30' : ''}`}>
               <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${toneFor(n.type)}`}>{iconFor(n.type)}</div>
               <div className="flex-1">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="font-medium text-slate-800">{n.title}</p>
-                  <span className="text-xs text-slate-400">{timeAgo(n.createdAt)}</span>
+                  <p className="font-medium text-ink-900">{n.title}</p>
+                  <span className="text-xs text-ink-400">{timeAgo(n.createdAt)}</span>
                 </div>
-                <p className="text-sm text-slate-500">{n.message}</p>
+                <p className="text-sm text-ink-500">{n.message}</p>
               </div>
               {!n.read && (
-                <button onClick={() => markRead(n.id)} className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-brand-600" title="Mark read">
+                <button onClick={() => markRead(n.id)} className="rounded-lg p-1.5 text-ink-400 hover:bg-ink-100 hover:text-brand-600" title="Mark read">
                   <Check size={16} />
                 </button>
               )}

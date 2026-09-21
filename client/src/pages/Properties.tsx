@@ -3,7 +3,7 @@ import { SlidersHorizontal, Search, X } from 'lucide-react';
 import { api } from '../lib/api';
 import type { Property } from '../types';
 import { PropertyCard } from '../components/PropertyCard';
-import { PageHeader, Spinner, EmptyState } from '../components/ui';
+import { PageHeader, EmptyState, CardSkeleton } from '../components/ui';
 
 const AMENITIES = ['WiFi', 'Air Conditioning', 'Heating', 'Washer', 'Gym', 'Pool', 'Elevator', 'Pet Friendly', 'Balcony', 'Parking', 'Security'];
 const TYPES = ['Apartment', 'House', 'Studio', 'Villa', 'Condo'];
@@ -43,7 +43,7 @@ export default function Properties() {
       <div className="card mb-6 p-4">
         <div className="flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
-            <Search size={18} className="absolute left-3 top-2.5 text-slate-400" />
+            <Search size={18} className="absolute left-3 top-2.5 text-ink-400" />
             <input className="input !pl-10" placeholder="Search by title, address or city…" value={filters.q}
               onChange={(e) => set('q', e.target.value)} onKeyDown={(e) => e.key === 'Enter' && load()} />
           </div>
@@ -54,7 +54,7 @@ export default function Properties() {
         </div>
 
         {showFilters && (
-          <div className="mt-4 grid gap-4 border-t border-slate-100 pt-4">
+          <div className="mt-4 grid gap-4 border-t border-ink-100 pt-4">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <div>
                 <label className="label">City / Location</label>
@@ -101,7 +101,7 @@ export default function Properties() {
               <div className="flex flex-wrap gap-2">
                 {AMENITIES.map((a) => (
                   <button key={a} onClick={() => toggleAmenity(a)}
-                    className={`rounded-full border px-3 py-1 text-xs font-medium ${amenities.includes(a) ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 text-slate-600'}`}>
+                    className={`rounded-full border px-3 py-1 text-xs font-medium ${amenities.includes(a) ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-ink-200 text-ink-600'}`}>
                     {a}
                   </button>
                 ))}
@@ -116,12 +116,14 @@ export default function Properties() {
       </div>
 
       {loading ? (
-        <Spinner label="Loading properties…" />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[...Array(6)].map((_, i) => <CardSkeleton key={i} />)}
+        </div>
       ) : properties.length === 0 ? (
         <EmptyState title="No properties found" subtitle="Try adjusting your search filters." />
       ) : (
         <>
-          <p className="mb-4 text-sm text-slate-500">{properties.length} propert{properties.length === 1 ? 'y' : 'ies'} found</p>
+          <p className="mb-4 text-sm text-ink-500">{properties.length} propert{properties.length === 1 ? 'y' : 'ies'} found</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {properties.map((p) => <PropertyCard key={p.id} property={p} />)}
           </div>

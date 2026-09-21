@@ -22,7 +22,7 @@ export default function AdminRequests() {
         <div className="card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-400">
+              <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
                 <tr>
                   <th className="px-4 py-3">Tenant</th>
                   <th className="px-4 py-3">Property</th>
@@ -31,14 +31,14 @@ export default function AdminRequests() {
                   <th className="px-4 py-3">Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-ink-100">
                 {requests.map((r) => (
-                  <tr key={r.id} className="hover:bg-slate-50">
-                    <td className="px-4 py-3 font-medium text-slate-700">{r.tenant?.name}</td>
-                    <td className="px-4 py-3 text-slate-500">{r.property?.title}</td>
-                    <td className="px-4 py-3 font-semibold text-slate-800">{currency(r.property?.monthlyRent || 0)}</td>
+                  <tr key={r.id} className="hover:bg-ink-50">
+                    <td className="px-4 py-3 font-medium text-ink-700">{r.tenant?.name}</td>
+                    <td className="px-4 py-3 text-ink-500">{r.property?.title}</td>
+                    <td className="px-4 py-3 font-semibold text-ink-900">{currency(r.property?.monthlyRent || 0)}</td>
                     <td className="px-4 py-3"><StatusBadge status={r.status} /></td>
-                    <td className="px-4 py-3 text-slate-500">{dateFmt(r.createdAt)}</td>
+                    <td className="px-4 py-3 text-ink-500">{dateFmt(r.createdAt)}</td>
                   </tr>
                 ))}
               </tbody>

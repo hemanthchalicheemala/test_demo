@@ -4,16 +4,21 @@ import { Users, Building2, ClipboardList, Wrench, DollarSign, Home, CheckCircle,
 import { BarChart, Bar, PieChart, Pie, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { api } from '../../lib/api';
 import { StatCard } from '../../components/StatCard';
-import { PageHeader, Spinner } from '../../components/ui';
+import { PageHeader, StatSkeleton } from '../../components/ui';
 import { currency } from '../../lib/format';
 
-const REQ_COLORS = ['#f59e0b', '#10b981', '#ef4444', '#94a3b8'];
-const COMP_COLORS = ['#f59e0b', '#3b82f6', '#10b981'];
+const REQ_COLORS = ['#f2911a', '#10b981', '#ef4444', '#c0c1d2'];
+const COMP_COLORS = ['#f2911a', '#6538ea', '#10b981'];
 
 export default function AdminDashboard() {
   const [data, setData] = useState<any>(null);
   useEffect(() => { api.get('/stats/admin').then((res) => setData(res.data)); }, []);
-  if (!data) return <Spinner label="Loading dashboard…" />;
+  if (!data) return (
+    <div>
+      <PageHeader title="Admin Dashboard" subtitle="Loading platform statistics…" />
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[...Array(8)].map((_, i) => <StatSkeleton key={i} />)}</div>
+    </div>
+  );
   const s = data.stats;
 
   return (
@@ -33,15 +38,15 @@ export default function AdminDashboard() {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <div className="card p-6 lg:col-span-1">
-          <h3 className="font-semibold text-slate-800">Platform Revenue</h3>
-          <p className="text-sm text-slate-400">Last 6 months</p>
+          <h3 className="font-semibold text-ink-900">Platform Revenue</h3>
+          <p className="text-sm text-ink-400">Last 6 months</p>
           <div className="mt-4 h-56">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data.revenueByMonth}>
-                <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={12} stroke="#94a3b8" />
-                <YAxis tickLine={false} axisLine={false} fontSize={12} stroke="#94a3b8" tickFormatter={(v) => `$${v}`} />
+                <XAxis dataKey="label" tickLine={false} axisLine={false} fontSize={12} stroke="#9c9db6" />
+                <YAxis tickLine={false} axisLine={false} fontSize={12} stroke="#9c9db6" tickFormatter={(v) => `$${v}`} />
                 <Tooltip formatter={(v: number) => currency(v)} cursor={{ fill: '#f1f5f9' }} />
-                <Bar dataKey="value" fill="#7c3aed" radius={[6, 6, 0, 0]} maxBarSize={40} />
+                <Bar dataKey="value" fill="#6538ea" radius={[6, 6, 0, 0]} maxBarSize={40} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -52,10 +57,10 @@ export default function AdminDashboard() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Link to="/admin/users" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600"><Users size={18} /></div><span className="font-medium text-slate-700">Manage Users</span></Link>
-        <Link to="/admin/properties" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600"><Building2 size={18} /></div><span className="font-medium text-slate-700">Manage Properties</span></Link>
-        <Link to="/admin/requests" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600"><ClipboardList size={18} /></div><span className="font-medium text-slate-700">Monitor Requests</span></Link>
-        <Link to="/admin/complaints" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600"><Wrench size={18} /></div><span className="font-medium text-slate-700">Monitor Complaints</span></Link>
+        <Link to="/admin/users" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-50 text-brand-600"><Users size={18} /></div><span className="font-medium text-ink-700">Manage Users</span></Link>
+        <Link to="/admin/properties" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-600"><Building2 size={18} /></div><span className="font-medium text-ink-700">Manage Properties</span></Link>
+        <Link to="/admin/requests" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600"><ClipboardList size={18} /></div><span className="font-medium text-ink-700">Monitor Requests</span></Link>
+        <Link to="/admin/complaints" className="card flex items-center gap-3 p-4 hover:shadow-soft"><div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-50 text-red-600"><Wrench size={18} /></div><span className="font-medium text-ink-700">Monitor Complaints</span></Link>
       </div>
     </div>
   );
@@ -64,7 +69,7 @@ export default function AdminDashboard() {
 function Donut({ title, data, colors }: { title: string; data: any[]; colors: string[] }) {
   return (
     <div className="card p-6">
-      <h3 className="font-semibold text-slate-800">{title}</h3>
+      <h3 className="font-semibold text-ink-900">{title}</h3>
       <div className="mt-2 h-44">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
@@ -77,7 +82,7 @@ function Donut({ title, data, colors }: { title: string; data: any[]; colors: st
       </div>
       <div className="mt-2 grid grid-cols-2 gap-1 text-xs">
         {data.map((b, i) => (
-          <div key={b.name} className="flex items-center gap-1.5 text-slate-500">
+          <div key={b.name} className="flex items-center gap-1.5 text-ink-500">
             <span className="h-2.5 w-2.5 rounded-full" style={{ background: colors[i % colors.length] }} /> {b.name} ({b.value})
           </div>
         ))}

@@ -29,27 +29,28 @@ export default function Register() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="flex items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md">
-          <Link to="/" className="mb-8 flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white"><Home size={18} /></div>
-            <span className="text-xl font-extrabold text-slate-800">RentConnect</span>
+      <div className="relative flex items-center justify-center px-6 py-12">
+        <div className="absolute inset-0 -z-10 bg-mesh lg:hidden" />
+        <div className="w-full max-w-md animate-fade-in-up">
+          <Link to="/" className="mb-8 flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white"><Home size={18} /></div>
+            <span className="font-display text-xl font-extrabold text-ink-900">RentConnect</span>
           </Link>
-          <h1 className="text-2xl font-bold text-slate-800">Create your account</h1>
-          <p className="mt-1 text-sm text-slate-500">Join RentConnect in seconds.</p>
+          <h1 className="font-display text-3xl font-bold text-ink-900">Create your account</h1>
+          <p className="mt-1.5 text-sm text-ink-500">Join RentConnect in seconds.</p>
 
-          {error && <div className="mt-4 rounded-lg bg-red-50 px-4 py-2 text-sm text-red-600">{error}</div>}
+          {error && <div className="mt-4 rounded-xl bg-red-50 px-4 py-2.5 text-sm text-red-600 ring-1 ring-red-100">{error}</div>}
 
           <form onSubmit={submit} className="mt-6 space-y-4">
             <div>
               <label className="label">I am a…</label>
               <div className="grid grid-cols-2 gap-3">
                 <button type="button" onClick={() => set('role', 'TENANT')}
-                  className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium ${form.role === 'TENANT' ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 text-slate-600'}`}>
+                  className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition ${form.role === 'TENANT' ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-ink-200 text-ink-600 hover:border-ink-300'}`}>
                   <UserIcon size={18} /> Tenant
                 </button>
                 <button type="button" onClick={() => set('role', 'OWNER')}
-                  className={`flex items-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium ${form.role === 'OWNER' ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 text-slate-600'}`}>
+                  className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition ${form.role === 'OWNER' ? 'border-brand-500 bg-brand-50 text-brand-700 shadow-sm' : 'border-ink-200 text-ink-600 hover:border-ink-300'}`}>
                   <Building2 size={18} /> House Owner
                 </button>
               </div>
@@ -76,23 +77,23 @@ export default function Register() {
                 <input className="input" value={form.city} onChange={(e) => set('city', e.target.value)} />
               </div>
             </div>
-            <button type="submit" className="btn-primary w-full !py-2.5" disabled={loading}>
+            <button type="submit" className="btn-primary w-full !py-3" disabled={loading}>
               {loading && <Loader2 size={16} className="animate-spin" />} Create Account
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-6 text-center text-sm text-ink-500">
             Already have an account? <Link to="/login" className="font-semibold text-brand-600 hover:underline">Sign in</Link>
           </p>
         </div>
       </div>
 
-      <div className="relative hidden lg:block">
+      <div className="relative hidden overflow-hidden lg:block">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=70" alt="" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 to-brand-600/30" />
-        <div className="absolute bottom-10 left-10 text-white">
-          <h2 className="text-3xl font-bold">Find your next home</h2>
-          <p className="mt-2 max-w-sm text-brand-100">List properties or discover your perfect rental with RentConnect.</p>
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-800/40 to-accent-500/20" />
+        <div className="absolute bottom-12 left-10 right-10 text-white">
+          <h2 className="font-display text-4xl font-bold leading-tight">Find your next home.</h2>
+          <p className="mt-3 max-w-sm text-lg text-brand-100">List properties or discover your perfect rental with RentConnect.</p>
         </div>
       </div>
     </div>

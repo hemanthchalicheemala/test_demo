@@ -33,22 +33,22 @@ export default function OwnerTenants() {
               <div className="flex items-center gap-3">
                 <img src={l.tenant?.avatar || `https://i.pravatar.cc/80?u=${l.tenant?.email}`} alt="" className="h-14 w-14 rounded-full object-cover" />
                 <div>
-                  <h3 className="font-semibold text-slate-800">{l.tenant?.name}</h3>
-                  <p className="text-sm text-slate-500">{l.property?.title}</p>
+                  <h3 className="font-semibold text-ink-900">{l.tenant?.name}</h3>
+                  <p className="text-sm text-ink-500">{l.property?.title}</p>
                 </div>
               </div>
-              <div className="mt-4 space-y-2 text-sm text-slate-600">
+              <div className="mt-4 space-y-2 text-sm text-ink-600">
                 {l.tenant?.email && <p className="flex items-center gap-2"><Mail size={14} /> {l.tenant.email}</p>}
                 {l.tenant?.phone && <p className="flex items-center gap-2"><Phone size={14} /> {l.tenant.phone}</p>}
               </div>
-              <div className="mt-4 flex items-center justify-between rounded-lg bg-slate-50 p-3 text-sm">
+              <div className="mt-4 flex items-center justify-between rounded-lg bg-ink-50 p-3 text-sm">
                 <div>
-                  <p className="text-xs text-slate-400">Rent</p>
+                  <p className="text-xs text-ink-400">Rent</p>
                   <p className="font-semibold text-brand-600">{currency(l.rent)}/mo</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs text-slate-400">Since</p>
-                  <p className="font-medium text-slate-700">{dateFmt(l.startDate)}</p>
+                  <p className="text-xs text-ink-400">Since</p>
+                  <p className="font-medium text-ink-700">{dateFmt(l.startDate)}</p>
                 </div>
               </div>
               <button className="btn-ghost mt-3 w-full text-red-600" onClick={() => endLease(l.id)}><LogOut size={15} /> End Tenancy</button>

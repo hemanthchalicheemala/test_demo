@@ -77,7 +77,7 @@ export default function PropertyForm() {
 
       <form onSubmit={submit} className="space-y-6">
         <div className="card p-6">
-          <h3 className="mb-4 font-semibold text-slate-800">Basic Information</h3>
+          <h3 className="mb-4 font-semibold text-ink-900">Basic Information</h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="label">Title</label>
@@ -108,7 +108,7 @@ export default function PropertyForm() {
         </div>
 
         <div className="card p-6">
-          <h3 className="mb-4 font-semibold text-slate-800">Pricing & Details</h3>
+          <h3 className="mb-4 font-semibold text-ink-900">Pricing & Details</h3>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <label className="label">Monthly Rent ($)</label>
@@ -128,21 +128,21 @@ export default function PropertyForm() {
             </div>
           </div>
           <div className="mt-4 flex gap-6">
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-ink-700">
               <input type="checkbox" className="h-4 w-4 rounded" checked={form.furnished} onChange={(e) => set('furnished', e.target.checked)} /> Furnished
             </label>
-            <label className="flex items-center gap-2 text-sm text-slate-700">
+            <label className="flex items-center gap-2 text-sm text-ink-700">
               <input type="checkbox" className="h-4 w-4 rounded" checked={form.parking} onChange={(e) => set('parking', e.target.checked)} /> Parking available
             </label>
           </div>
         </div>
 
         <div className="card p-6">
-          <h3 className="mb-4 font-semibold text-slate-800">Amenities</h3>
+          <h3 className="mb-4 font-semibold text-ink-900">Amenities</h3>
           <div className="flex flex-wrap gap-2">
             {ALL_AMENITIES.map((a) => (
               <button type="button" key={a} onClick={() => toggleAmenity(a)}
-                className={`rounded-full border px-3 py-1.5 text-sm font-medium ${amenities.includes(a) ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-slate-200 text-slate-600'}`}>
+                className={`rounded-full border px-3 py-1.5 text-sm font-medium ${amenities.includes(a) ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-ink-200 text-ink-600'}`}>
                 {a}
               </button>
             ))}
@@ -150,13 +150,13 @@ export default function PropertyForm() {
         </div>
 
         <div className="card p-6">
-          <h3 className="mb-4 font-semibold text-slate-800">Photos</h3>
+          <h3 className="mb-4 font-semibold text-ink-900">Photos</h3>
           <div className="flex gap-2">
             <input className="input" value={imgInput} onChange={(e) => setImgInput(e.target.value)} placeholder="Paste an image URL…" />
             <button type="button" className="btn-secondary" onClick={() => addImage(imgInput)}><Plus size={16} /> Add</button>
           </div>
           <div className="mt-2 flex flex-wrap gap-2">
-            <span className="text-xs text-slate-400">Quick add:</span>
+            <span className="text-xs text-ink-400">Quick add:</span>
             {SAMPLE_IMAGES.map((s, i) => (
               <button type="button" key={s} className="text-xs text-brand-600 hover:underline" onClick={() => addImage(s)}>Sample {i + 1}</button>
             ))}
@@ -164,16 +164,16 @@ export default function PropertyForm() {
           {images.length > 0 && (
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {images.map((url) => (
-                <div key={url} className="group relative h-24 overflow-hidden rounded-lg bg-slate-100">
+                <div key={url} className="group relative h-24 overflow-hidden rounded-lg bg-ink-100">
                   <img src={url} alt="" className="h-full w-full object-cover" />
                   <button type="button" onClick={() => setImages((prev) => prev.filter((u) => u !== url))}
-                    className="absolute right-1 top-1 rounded-full bg-white/90 p-1 text-slate-600 opacity-0 transition group-hover:opacity-100"><X size={14} /></button>
+                    className="absolute right-1 top-1 rounded-full bg-white/90 p-1 text-ink-600 opacity-0 transition group-hover:opacity-100"><X size={14} /></button>
                 </div>
               ))}
             </div>
           )}
           {images.length === 0 && (
-            <div className="mt-4 flex items-center gap-2 rounded-lg border border-dashed border-slate-200 p-4 text-sm text-slate-400">
+            <div className="mt-4 flex items-center gap-2 rounded-lg border border-dashed border-ink-200 p-4 text-sm text-ink-400">
               <ImagePlus size={18} /> No images added — sample photos will be used.
             </div>
           )}

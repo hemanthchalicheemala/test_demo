@@ -38,7 +38,7 @@ export default function AdminUsers() {
 
       <div className="card mb-4 flex flex-col gap-3 p-4 sm:flex-row">
         <div className="relative flex-1">
-          <Search size={18} className="absolute left-3 top-2.5 text-slate-400" />
+          <Search size={18} className="absolute left-3 top-2.5 text-ink-400" />
           <input className="input !pl-10" placeholder="Search users…" value={q} onChange={(e) => setQ(e.target.value)} />
         </div>
         <select className="input sm:w-48" value={role} onChange={(e) => setRole(e.target.value)}>
@@ -49,7 +49,7 @@ export default function AdminUsers() {
       <div className="card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-400">
+            <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
               <tr>
                 <th className="px-4 py-3">User</th>
                 <th className="px-4 py-3">Role</th>
@@ -59,21 +59,21 @@ export default function AdminUsers() {
                 <th className="px-4 py-3"></th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-ink-100">
               {filtered.map((u) => (
-                <tr key={u.id} className="hover:bg-slate-50">
+                <tr key={u.id} className="hover:bg-ink-50">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
                       <img src={u.avatar || `https://i.pravatar.cc/60?u=${u.email}`} alt="" className="h-9 w-9 rounded-full object-cover" />
-                      <div><p className="font-medium text-slate-700">{u.name}</p><p className="text-xs text-slate-400">{u.email}</p></div>
+                      <div><p className="font-medium text-ink-700">{u.name}</p><p className="text-xs text-ink-400">{u.email}</p></div>
                     </div>
                   </td>
                   <td className="px-4 py-3"><span className={`badge ${roleStyle[u.role]}`}>{u.role}</span></td>
-                  <td className="px-4 py-3 text-slate-500">{u.city || '—'}</td>
-                  <td className="px-4 py-3 text-xs text-slate-500">{u._count?.properties || 0} props · {u._count?.requests || 0} reqs · {u._count?.complaints || 0} complaints</td>
-                  <td className="px-4 py-3 text-slate-500">{dateFmt(u.createdAt)}</td>
+                  <td className="px-4 py-3 text-ink-500">{u.city || '—'}</td>
+                  <td className="px-4 py-3 text-xs text-ink-500">{u._count?.properties || 0} props · {u._count?.requests || 0} reqs · {u._count?.complaints || 0} complaints</td>
+                  <td className="px-4 py-3 text-ink-500">{dateFmt(u.createdAt)}</td>
                   <td className="px-4 py-3 text-right">
-                    {u.role !== 'ADMIN' && <button onClick={() => remove(u.id)} className="rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-600"><Trash2 size={16} /></button>}
+                    {u.role !== 'ADMIN' && <button onClick={() => remove(u.id)} className="rounded-lg p-1.5 text-ink-400 hover:bg-red-50 hover:text-red-600"><Trash2 size={16} /></button>}
                   </td>
                 </tr>
               ))}

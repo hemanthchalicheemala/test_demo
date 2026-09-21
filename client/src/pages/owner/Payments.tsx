@@ -49,7 +49,7 @@ export default function OwnerPayments() {
         <div className="card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-400">
+              <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
                 <tr>
                   <th className="px-4 py-3">Tenant</th>
                   <th className="px-4 py-3">Property</th>
@@ -60,14 +60,14 @@ export default function OwnerPayments() {
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-ink-100">
                 {payments.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50">
-                    <td className="px-4 py-3 font-medium text-slate-700">{p.tenant?.name}</td>
-                    <td className="px-4 py-3 text-slate-500">{p.property?.title}</td>
-                    <td className="px-4 py-3 font-semibold text-slate-800">{currency(p.amount)}</td>
-                    <td className="px-4 py-3 text-slate-500">{dateFmt(p.dueDate)}</td>
-                    <td className="px-4 py-3 text-slate-500">{p.paidDate ? dateFmt(p.paidDate) : '—'}</td>
+                  <tr key={p.id} className="hover:bg-ink-50">
+                    <td className="px-4 py-3 font-medium text-ink-700">{p.tenant?.name}</td>
+                    <td className="px-4 py-3 text-ink-500">{p.property?.title}</td>
+                    <td className="px-4 py-3 font-semibold text-ink-900">{currency(p.amount)}</td>
+                    <td className="px-4 py-3 text-ink-500">{dateFmt(p.dueDate)}</td>
+                    <td className="px-4 py-3 text-ink-500">{p.paidDate ? dateFmt(p.paidDate) : '—'}</td>
                     <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
                     <td className="px-4 py-3 text-right">
                       {p.status !== 'PAID' && <button className="btn-secondary !py-1.5 !px-3 text-xs" onClick={() => markPaid(p.id)}><Check size={14} /> Mark Paid</button>}

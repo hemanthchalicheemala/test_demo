@@ -35,13 +35,13 @@ export default function MyApplications() {
               <img src={r.property?.images?.[0]?.url || 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=400&q=70'} alt="" className="h-24 w-full rounded-xl object-cover sm:w-36" />
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <Link to={`/properties/${r.propertyId}`} className="font-semibold text-slate-800 hover:text-brand-600">{r.property?.title}</Link>
+                  <Link to={`/properties/${r.propertyId}`} className="font-semibold text-ink-900 hover:text-brand-600">{r.property?.title}</Link>
                   <StatusBadge status={r.status} />
                 </div>
-                <p className="text-sm text-slate-500">{r.property?.address}, {r.property?.city}</p>
+                <p className="text-sm text-ink-500">{r.property?.address}, {r.property?.city}</p>
                 <p className="mt-1 text-sm font-medium text-brand-600">{currency(r.property?.monthlyRent || 0)}/mo</p>
-                {r.message && <p className="mt-2 text-sm italic text-slate-400">"{r.message}"</p>}
-                <p className="mt-1 text-xs text-slate-400">Applied {dateFmt(r.createdAt)}</p>
+                {r.message && <p className="mt-2 text-sm italic text-ink-400">"{r.message}"</p>}
+                <p className="mt-1 text-xs text-ink-400">Applied {dateFmt(r.createdAt)}</p>
               </div>
               {r.status === 'PENDING' && (
                 <button className="btn-ghost text-red-600" onClick={() => cancel(r.id)}><X size={16} /> Cancel</button>

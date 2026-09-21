@@ -79,16 +79,21 @@ export function Layout() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 lg:flex">
+    <div className="min-h-screen bg-ink-50 lg:flex">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-white border-r border-slate-200 transition-transform lg:static lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex h-16 items-center gap-2 border-b border-slate-100 px-5">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white"><Home size={18} /></div>
-            <span className="text-lg font-extrabold tracking-tight text-slate-800">RentConnect</span>
+      <aside className={`fixed inset-y-0 left-0 z-40 w-64 transform border-r border-ink-100 bg-white transition-transform duration-300 lg:static lg:translate-x-0 ${open ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex h-16 items-center gap-2.5 px-5">
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-gradient text-white shadow-glow"><Home size={18} /></div>
+            <span className="font-display text-lg font-extrabold tracking-tight text-ink-900">RentConnect</span>
           </Link>
         </div>
-        <nav className="flex flex-col gap-1 p-3">
+        <div className="px-5 pb-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-700">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" /> {user?.role} workspace
+          </span>
+        </div>
+        <nav className="flex flex-col gap-0.5 overflow-y-auto p-3 pb-8" style={{ maxHeight: 'calc(100vh - 6rem)' }}>
           {items.map((it) => (
             <NavLink
               key={it.to}
@@ -96,69 +101,82 @@ export function Layout() {
               end={it.to === `/${user?.role.toLowerCase()}` || it.to.split('/').length <= 2}
               onClick={() => setOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${
-                  isActive ? 'bg-brand-50 text-brand-700' : 'text-slate-600 hover:bg-slate-50'
+                `group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+                  isActive
+                    ? 'bg-brand-gradient text-white shadow-glow'
+                    : 'text-ink-600 hover:bg-brand-50 hover:text-brand-700'
                 }`
               }
             >
-              {it.icon}
-              {it.label}
+              {({ isActive }: { isActive: boolean }) => (
+                <>
+                  <span className={isActive ? 'text-white' : 'text-ink-400 group-hover:text-brand-500'}>{it.icon}</span>
+                  {it.label}
+                </>
+              )}
             </NavLink>
           ))}
         </nav>
       </aside>
 
-      {open && <div className="fixed inset-0 z-30 bg-slate-900/30 lg:hidden" onClick={() => setOpen(false)} />}
+      {open && <div className="fixed inset-0 z-30 bg-ink-950/40 backdrop-blur-sm lg:hidden" onClick={() => setOpen(false)} />}
 
       {/* Main */}
       <div className="flex min-h-screen flex-1 flex-col lg:w-0">
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white/80 px-4 backdrop-blur lg:px-8">
-          <button className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 lg:hidden" onClick={() => setOpen(true)}>
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-ink-100 bg-white/70 px-4 backdrop-blur-xl lg:px-8">
+          <button className="rounded-lg p-2 text-ink-500 hover:bg-ink-100 lg:hidden" onClick={() => setOpen(true)}>
             <Menu size={20} />
           </button>
-          <div className="hidden lg:block">
-            <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">{user?.role}</span>
+          <div className="hidden items-center gap-2 lg:flex">
+            <p className="font-display text-sm font-semibold text-ink-800">Welcome back, {user?.name.split(' ')[0]}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <div className="relative">
-              <button onClick={() => { setShowNotif((s) => !s); if (!showNotif) loadNotifs(); }} className="relative rounded-lg p-2 text-slate-500 hover:bg-slate-100">
-                <Bell size={20} />
-                {unread > 0 && <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">{unread}</span>}
+              <button onClick={() => { setShowNotif((s) => !s); if (!showNotif) loadNotifs(); }} className="relative rounded-xl p-2.5 text-ink-500 transition hover:bg-ink-100">
+                <Bell size={19} />
+                {unread > 0 && <span className="absolute right-1.5 top-1.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent-500 px-1 text-[10px] font-bold text-white ring-2 ring-white">{unread}</span>}
               </button>
               {showNotif && (
-                <div className="absolute right-0 mt-2 w-80 rounded-xl border border-slate-100 bg-white shadow-soft">
-                  <div className="flex items-center justify-between border-b border-slate-100 px-4 py-2.5">
-                    <span className="text-sm font-semibold text-slate-700">Notifications</span>
-                    <button onClick={markAllRead} className="text-xs font-medium text-brand-600 hover:underline">Mark all read</button>
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setShowNotif(false)} />
+                  <div className="absolute right-0 z-20 mt-2 w-80 animate-fade-in-up overflow-hidden rounded-2xl border border-ink-100 bg-white shadow-soft">
+                    <div className="flex items-center justify-between border-b border-ink-100 px-4 py-3">
+                      <span className="font-display text-sm font-semibold text-ink-800">Notifications</span>
+                      <button onClick={markAllRead} className="text-xs font-medium text-brand-600 hover:underline">Mark all read</button>
+                    </div>
+                    <div className="max-h-80 overflow-y-auto">
+                      {notifs.length === 0 && <p className="px-4 py-8 text-center text-sm text-ink-400">You're all caught up</p>}
+                      {notifs.map((n) => (
+                        <div key={n.id} className={`border-b border-ink-50 px-4 py-3 transition hover:bg-ink-50 ${!n.read ? 'bg-brand-50/40' : ''}`}>
+                          <p className="text-sm font-medium text-ink-800">{n.title}</p>
+                          <p className="text-xs text-ink-500">{n.message}</p>
+                          <p className="mt-1 text-[11px] text-ink-400">{timeAgo(n.createdAt)}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <div className="max-h-80 overflow-y-auto">
-                    {notifs.length === 0 && <p className="px-4 py-6 text-center text-sm text-slate-400">No notifications</p>}
-                    {notifs.map((n) => (
-                      <div key={n.id} className={`border-b border-slate-50 px-4 py-3 ${!n.read ? 'bg-brand-50/40' : ''}`}>
-                        <p className="text-sm font-medium text-slate-700">{n.title}</p>
-                        <p className="text-xs text-slate-500">{n.message}</p>
-                        <p className="mt-1 text-[11px] text-slate-400">{timeAgo(n.createdAt)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                </>
               )}
             </div>
             <div className="group relative">
-              <button className="flex items-center gap-2 rounded-lg p-1.5 hover:bg-slate-100">
-                <img src={user?.avatar || `https://i.pravatar.cc/80?u=${user?.email}`} alt="" className="h-8 w-8 rounded-full object-cover" />
-                <span className="hidden text-sm font-medium text-slate-700 sm:block">{user?.name}</span>
+              <button className="flex items-center gap-2.5 rounded-xl p-1.5 pr-2.5 transition hover:bg-ink-100">
+                <img src={user?.avatar || `https://i.pravatar.cc/80?u=${user?.email}`} alt="" className="h-8 w-8 rounded-full object-cover ring-2 ring-white" />
+                <span className="hidden text-sm font-semibold text-ink-700 sm:block">{user?.name}</span>
               </button>
-              <div className="invisible absolute right-0 mt-1 w-48 rounded-xl border border-slate-100 bg-white py-1 opacity-0 shadow-soft transition group-hover:visible group-hover:opacity-100">
-                <Link to="/profile" className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50"><UserIcon size={16} /> Profile</Link>
-                <Link to="/settings" className="flex items-center gap-2 px-4 py-2 text-sm text-slate-600 hover:bg-slate-50"><Settings size={16} /> Settings</Link>
-                <button onClick={handleLogout} className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"><LogOut size={16} /> Logout</button>
+              <div className="invisible absolute right-0 mt-1 w-52 overflow-hidden rounded-2xl border border-ink-100 bg-white py-1.5 opacity-0 shadow-soft transition-all group-hover:visible group-hover:opacity-100">
+                <div className="border-b border-ink-50 px-4 py-2">
+                  <p className="text-sm font-semibold text-ink-800">{user?.name}</p>
+                  <p className="truncate text-xs text-ink-400">{user?.email}</p>
+                </div>
+                <Link to="/profile" className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-ink-600 transition hover:bg-ink-50"><UserIcon size={16} /> Profile</Link>
+                <Link to="/settings" className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-ink-600 transition hover:bg-ink-50"><Settings size={16} /> Settings</Link>
+                <button onClick={handleLogout} className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-red-600 transition hover:bg-red-50"><LogOut size={16} /> Logout</button>
               </div>
             </div>
           </div>
         </header>
 
-        <main className="flex-1 p-4 lg:p-8">
+        <main className="flex-1 animate-fade-in p-4 lg:p-8">
           <Outlet />
         </main>
       </div>

@@ -30,7 +30,7 @@ export default function OwnerComplaints() {
       <div className="mb-4 flex flex-wrap gap-2">
         {['ALL', 'OPEN', 'IN_PROGRESS', 'RESOLVED'].map((f) => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`rounded-full px-3 py-1.5 text-sm font-medium ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 border border-slate-200'}`}>
+            className={`rounded-full px-3 py-1.5 text-sm font-medium ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-ink-600 border border-ink-200'}`}>
             {f.replace('_', ' ').charAt(0) + f.replace('_', ' ').slice(1).toLowerCase()}
           </button>
         ))}
@@ -45,12 +45,12 @@ export default function OwnerComplaints() {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-semibold text-slate-800">{c.title}</h3>
+                    <h3 className="font-semibold text-ink-900">{c.title}</h3>
                     <StatusBadge status={c.status} />
                     <StatusBadge status={c.priority} />
                   </div>
-                  <p className="mt-1 text-sm text-slate-500">{c.description}</p>
-                  <p className="mt-2 text-xs text-slate-400">{c.category} · {c.property?.title} · by {c.tenant?.name} · {dateFmt(c.createdAt)}</p>
+                  <p className="mt-1 text-sm text-ink-500">{c.description}</p>
+                  <p className="mt-2 text-xs text-ink-400">{c.category} · {c.property?.title} · by {c.tenant?.name} · {dateFmt(c.createdAt)}</p>
                 </div>
                 {NEXT[c.status] && (
                   <button className="btn-primary whitespace-nowrap" onClick={() => update(c.id, NEXT[c.status].status)}>{NEXT[c.status].label}</button>

@@ -23,12 +23,12 @@ export default function AdminComplaints() {
           {complaints.map((c) => (
             <div key={c.id} className="card p-5">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-semibold text-slate-800">{c.title}</h3>
+                <h3 className="font-semibold text-ink-900">{c.title}</h3>
                 <StatusBadge status={c.status} />
                 <StatusBadge status={c.priority} />
               </div>
-              <p className="mt-1 text-sm text-slate-500">{c.description}</p>
-              <p className="mt-2 text-xs text-slate-400">{c.category} · {c.property?.title} · by {c.tenant?.name} · {dateFmt(c.createdAt)}</p>
+              <p className="mt-1 text-sm text-ink-500">{c.description}</p>
+              <p className="mt-2 text-xs text-ink-400">{c.category} · {c.property?.title} · by {c.tenant?.name} · {dateFmt(c.createdAt)}</p>
             </div>
           ))}
         </div>

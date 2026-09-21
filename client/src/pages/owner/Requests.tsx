@@ -31,7 +31,7 @@ export default function OwnerRequests() {
       <div className="mb-4 flex flex-wrap gap-2">
         {['ALL', 'PENDING', 'ACCEPTED', 'REJECTED', 'CANCELLED'].map((f) => (
           <button key={f} onClick={() => setFilter(f)}
-            className={`rounded-full px-3 py-1.5 text-sm font-medium ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-slate-600 border border-slate-200'}`}>
+            className={`rounded-full px-3 py-1.5 text-sm font-medium ${filter === f ? 'bg-brand-600 text-white' : 'bg-white text-ink-600 border border-ink-200'}`}>
             {f.charAt(0) + f.slice(1).toLowerCase()}
           </button>
         ))}
@@ -46,12 +46,12 @@ export default function OwnerRequests() {
               <img src={r.tenant?.avatar || `https://i.pravatar.cc/80?u=${r.tenant?.email}`} alt="" className="h-14 w-14 rounded-full object-cover" />
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-semibold text-slate-800">{r.tenant?.name}</h3>
+                  <h3 className="font-semibold text-ink-900">{r.tenant?.name}</h3>
                   <StatusBadge status={r.status} />
                 </div>
-                <p className="text-sm text-slate-500">applied for <Link to={`/properties/${r.propertyId}`} className="font-medium text-brand-600 hover:underline">{r.property?.title}</Link> · {currency(r.property?.monthlyRent || 0)}/mo</p>
-                {r.message && <p className="mt-1 text-sm italic text-slate-400 line-clamp-1">"{r.message}"</p>}
-                <p className="mt-1 text-xs text-slate-400">{dateFmt(r.createdAt)}</p>
+                <p className="text-sm text-ink-500">applied for <Link to={`/properties/${r.propertyId}`} className="font-medium text-brand-600 hover:underline">{r.property?.title}</Link> · {currency(r.property?.monthlyRent || 0)}/mo</p>
+                {r.message && <p className="mt-1 text-sm italic text-ink-400 line-clamp-1">"{r.message}"</p>}
+                <p className="mt-1 text-xs text-ink-400">{dateFmt(r.createdAt)}</p>
               </div>
               <div className="flex gap-2">
                 <button className="btn-secondary" onClick={() => setProfile(r)}>View Profile</button>
@@ -73,19 +73,19 @@ export default function OwnerRequests() {
             <div className="flex items-center gap-4">
               <img src={profile.tenant.avatar || `https://i.pravatar.cc/120?u=${profile.tenant.email}`} alt="" className="h-16 w-16 rounded-full object-cover" />
               <div>
-                <h3 className="text-lg font-semibold text-slate-800">{profile.tenant.name}</h3>
-                <p className="text-sm text-slate-500">Tenant</p>
+                <h3 className="text-lg font-semibold text-ink-900">{profile.tenant.name}</h3>
+                <p className="text-sm text-ink-500">Tenant</p>
               </div>
             </div>
-            <div className="mt-4 space-y-2 text-sm text-slate-600">
+            <div className="mt-4 space-y-2 text-sm text-ink-600">
               <p className="flex items-center gap-2"><Mail size={15} /> {profile.tenant.email}</p>
               {profile.tenant.phone && <p className="flex items-center gap-2"><Phone size={15} /> {profile.tenant.phone}</p>}
               {profile.tenant.city && <p className="flex items-center gap-2"><MapPin size={15} /> {profile.tenant.city}</p>}
             </div>
-            {profile.tenant.bio && <p className="mt-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-600">{profile.tenant.bio}</p>}
-            <div className="mt-4 rounded-lg border border-slate-100 p-3">
-              <p className="text-xs font-semibold uppercase text-slate-400">Application message</p>
-              <p className="mt-1 text-sm text-slate-600">{profile.message || 'No message provided.'}</p>
+            {profile.tenant.bio && <p className="mt-3 rounded-lg bg-ink-50 p-3 text-sm text-ink-600">{profile.tenant.bio}</p>}
+            <div className="mt-4 rounded-lg border border-ink-100 p-3">
+              <p className="text-xs font-semibold uppercase text-ink-400">Application message</p>
+              <p className="mt-1 text-sm text-ink-600">{profile.message || 'No message provided.'}</p>
             </div>
             {profile.status === 'PENDING' && (
               <div className="mt-5 flex justify-end gap-2">

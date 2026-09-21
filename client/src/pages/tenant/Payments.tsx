@@ -32,9 +32,9 @@ export default function TenantPayments() {
       <PageHeader title="Rent & Payments" subtitle="Pay your rent and review payment history." />
 
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
-        <div className="card p-5"><p className="text-sm text-slate-500">Outstanding Balance</p><p className="text-2xl font-bold text-red-600">{currency(totalDue)}</p></div>
-        <div className="card p-5"><p className="text-sm text-slate-500">Total Paid</p><p className="text-2xl font-bold text-emerald-600">{currency(paid.reduce((s, p) => s + p.amount, 0))}</p></div>
-        <div className="card p-5"><p className="text-sm text-slate-500">Payments Made</p><p className="text-2xl font-bold text-slate-800">{paid.length}</p></div>
+        <div className="card p-5"><p className="text-sm text-ink-500">Outstanding Balance</p><p className="text-2xl font-bold text-red-600">{currency(totalDue)}</p></div>
+        <div className="card p-5"><p className="text-sm text-ink-500">Total Paid</p><p className="text-2xl font-bold text-emerald-600">{currency(paid.reduce((s, p) => s + p.amount, 0))}</p></div>
+        <div className="card p-5"><p className="text-sm text-ink-500">Payments Made</p><p className="text-2xl font-bold text-ink-900">{paid.length}</p></div>
       </div>
 
       {payments.length === 0 ? (
@@ -43,7 +43,7 @@ export default function TenantPayments() {
         <div className="card overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-400">
+              <thead className="bg-ink-50 text-left text-xs uppercase tracking-wide text-ink-400">
                 <tr>
                   <th className="px-4 py-3">Property</th>
                   <th className="px-4 py-3">Amount</th>
@@ -53,13 +53,13 @@ export default function TenantPayments() {
                   <th className="px-4 py-3"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-ink-100">
                 {payments.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50">
-                    <td className="px-4 py-3 font-medium text-slate-700">{p.property?.title}</td>
-                    <td className="px-4 py-3 font-semibold text-slate-800">{currency(p.amount)}</td>
-                    <td className="px-4 py-3 text-slate-500">{dateFmt(p.dueDate)}</td>
-                    <td className="px-4 py-3 text-slate-500">{p.paidDate ? dateFmt(p.paidDate) : '—'}</td>
+                  <tr key={p.id} className="hover:bg-ink-50">
+                    <td className="px-4 py-3 font-medium text-ink-700">{p.property?.title}</td>
+                    <td className="px-4 py-3 font-semibold text-ink-900">{currency(p.amount)}</td>
+                    <td className="px-4 py-3 text-ink-500">{dateFmt(p.dueDate)}</td>
+                    <td className="px-4 py-3 text-ink-500">{p.paidDate ? dateFmt(p.paidDate) : '—'}</td>
                     <td className="px-4 py-3"><StatusBadge status={p.status} /></td>
                     <td className="px-4 py-3 text-right">
                       {p.status !== 'PAID' ? (
@@ -79,10 +79,10 @@ export default function TenantPayments() {
       <Modal open={!!payTarget} onClose={() => setPayTarget(null)} title="Pay Rent">
         {payTarget && (
           <div>
-            <div className="rounded-xl bg-slate-50 p-4">
-              <p className="text-sm text-slate-500">{payTarget.property?.title}</p>
+            <div className="rounded-xl bg-ink-50 p-4">
+              <p className="text-sm text-ink-500">{payTarget.property?.title}</p>
               <p className="text-2xl font-bold text-brand-600">{currency(payTarget.amount)}</p>
-              <p className="text-xs text-slate-400">Due {dateFmt(payTarget.dueDate)}</p>
+              <p className="text-xs text-ink-400">Due {dateFmt(payTarget.dueDate)}</p>
             </div>
             <label className="label mt-4">Payment Method</label>
             <select className="input" value={method} onChange={(e) => setMethod(e.target.value)}>

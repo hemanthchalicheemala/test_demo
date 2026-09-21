@@ -45,12 +45,12 @@ export default function OwnerAnnouncements() {
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600"><Megaphone size={18} /></div>
                   <div>
-                    <h3 className="font-semibold text-slate-800">{a.title}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{a.body}</p>
-                    <p className="mt-2 text-xs text-slate-400">{a.property ? a.property.title + ' · ' : ''}{timeAgo(a.createdAt)}</p>
+                    <h3 className="font-semibold text-ink-900">{a.title}</h3>
+                    <p className="mt-1 text-sm text-ink-500">{a.body}</p>
+                    <p className="mt-2 text-xs text-ink-400">{a.property ? a.property.title + ' · ' : ''}{timeAgo(a.createdAt)}</p>
                   </div>
                 </div>
-                <button onClick={() => remove(a.id)} className="rounded-lg p-1.5 text-slate-400 hover:bg-red-50 hover:text-red-600"><Trash2 size={16} /></button>
+                <button onClick={() => remove(a.id)} className="rounded-lg p-1.5 text-ink-400 hover:bg-red-50 hover:text-red-600"><Trash2 size={16} /></button>
               </div>
             </div>
           ))}

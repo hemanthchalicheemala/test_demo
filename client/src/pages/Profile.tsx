@@ -27,11 +27,11 @@ export default function Profile() {
       <PageHeader title="My Profile" subtitle="Manage your personal information." />
 
       <div className="card p-6">
-        <div className="flex items-center gap-4 border-b border-slate-100 pb-6">
+        <div className="flex items-center gap-4 border-b border-ink-100 pb-6">
           <img src={form.avatar || `https://i.pravatar.cc/120?u=${user?.email}`} alt="" className="h-20 w-20 rounded-full object-cover" />
           <div>
-            <h2 className="text-lg font-semibold text-slate-800">{user?.name}</h2>
-            <p className="text-sm text-slate-500">{user?.email}</p>
+            <h2 className="text-lg font-semibold text-ink-900">{user?.name}</h2>
+            <p className="text-sm text-ink-500">{user?.email}</p>
             <span className="badge mt-1 bg-brand-50 text-brand-700">{user?.role}</span>
           </div>
         </div>
@@ -60,7 +60,7 @@ export default function Profile() {
             <textarea className="input h-24" value={form.bio} onChange={(e) => set('bio', e.target.value)} />
           </div>
           <div className="sm:col-span-2 flex items-center justify-between">
-            <p className="text-xs text-slate-400">Member since {dateFmt(user?.createdAt)}</p>
+            <p className="text-xs text-ink-400">Member since {dateFmt(user?.createdAt)}</p>
             <button className="btn-primary" disabled={saving}>Save Changes</button>
           </div>
         </form>
